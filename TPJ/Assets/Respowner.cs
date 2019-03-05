@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class Respowner : MonoBehaviour
 {
+    public AudioSource audioData;
     public float maxHealth;
     private float currentHealth;
     // Start is called before the first frame update
@@ -30,7 +33,7 @@ public class Respowner : MonoBehaviour
         if ((yposition<-15 )|| (currentHealth <= 0))
         {
            SceneManager.LoadScene(SceneManager.GetActiveScene().name,LoadSceneMode.Single);
-        
+        audioData.Play(0);
         }
         
     }

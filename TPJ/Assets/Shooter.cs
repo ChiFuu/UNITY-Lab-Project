@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class Shooter : MonoBehaviour
 {   
+    public AudioSource audioData;
+    
     public GameObject bulletprefab;
     public Transform firepoint;
     private Rigidbody rb;
@@ -13,13 +17,7 @@ public class Shooter : MonoBehaviour
     private float nextFire = 0.0f;
 
     public float Power;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -34,6 +32,8 @@ public class Shooter : MonoBehaviour
     }
     private GameObject Shoot(){
         cannonball=Instantiate(bulletprefab,firepoint.position, firepoint.rotation);
+        audioData = GetComponent<AudioSource>();
+        audioData.Play(0);
         rb=cannonball.GetComponent<Rigidbody>();
         rb.AddForce(Power, 0,0, ForceMode.Impulse);
         return cannonball;
